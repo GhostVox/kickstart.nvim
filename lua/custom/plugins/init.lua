@@ -2,4 +2,13 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+
+return {
+  {
+    'kdheepak/lazygit.nvim',
+    lazy = false, -- Load the plugin immediately,
+    config = function()
+      vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>', { noremap = true, silent = true })
+    end,
+  },
+}
