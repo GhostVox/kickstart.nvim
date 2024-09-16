@@ -11,4 +11,12 @@ return {
       vim.keymap.set('n', '<leader>gs', ':Gstatus<CR>', { noremap = true, silent = true })
     end,
   },
+  {
+    'mbbill/undotree',
+    lazy = false, -- Load the plugin immediately
+    config = function()
+      -- Optional: Set up a keybinding to toggle UndoTree
+      vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
+    end,
+  },
 }
