@@ -72,6 +72,8 @@ vim.o.inccommand = 'split'
 -- Show which line your cursor is on
 vim.o.cursorline = true
 
+--Cursor shape
+vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,ve:ver25-Cursor,o:hor50-Cursor,i-ci:ver100-Cursor/lCursor,r-cr:hor15-Cursor/lCursor'
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
 
@@ -218,44 +220,44 @@ require('lazy').setup({
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    opts = {
-      -- delay between pressing a key and opening which-key (milliseconds)
-      -- this setting is independent of vim.o.timeoutlen
-      delay = 0,
-      icons = {
-        -- set icon mappings to true if you have a Nerd Font
-        mappings = vim.g.have_nerd_font,
-        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
-        -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
-        keys = vim.g.have_nerd_font and {} or {
-          Up = '<Up> ',
-          Down = '<Down> ',
-          Left = '<Left> ',
-          Right = '<Right> ',
-          C = '<C-…> ',
-          M = '<M-…> ',
-          D = '<D-…> ',
-          S = '<S-…> ',
-          CR = '<CR> ',
-          Esc = '<Esc> ',
-          ScrollWheelDown = '<ScrollWheelDown> ',
-          ScrollWheelUp = '<ScrollWheelUp> ',
-          NL = '<NL> ',
-          BS = '<BS> ',
-          Space = '<Space> ',
-          Tab = '<Tab> ',
-          F1 = '<F1>',
-          F2 = '<F2>',
-          F3 = '<F3>',
-          F4 = '<F4>',
-          F5 = '<F5>',
-          F6 = '<F6>',
-          F7 = '<F7>',
-          F8 = '<F8>',
-          F9 = '<F9>',
-          F10 = '<F10>',
-          F11 = '<F11>',
-          F12 = '<F12>',
+
+    config = function() -- This is the function that runs, AFTER loading
+      require('which-key').setup {
+        icons = {
+          -- set icon mappings to true if you have a Nerd Font
+          mappings = vim.g.have_nerd_font,
+          -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+          -- default whick-key.nvim defined Nerd Font icons, otherwise define a string table
+          keys = vim.g.have_nerd_font and {} or {
+            Up = '<Up> ',
+            Down = '<Down> ',
+            Left = '<Left> ',
+            Right = '<Right> ',
+            C = '<C-…> ',
+            M = '<M-…> ',
+            D = '<D-…> ',
+            S = '<S-…> ',
+            CR = '<CR> ',
+            Esc = '<Esc> ',
+            ScrollWheelDown = '<ScrollWheelDown> ',
+            ScrollWheelUp = '<ScrollWheelUp> ',
+            NL = '<NL> ',
+            BS = '<BS> ',
+            Space = '<Space> ',
+            Tab = '<Tab> ',
+            F1 = '<F1>',
+            F2 = '<F2>',
+            F3 = '<F3>',
+            F4 = '<F4>',
+            F5 = '<F5>',
+            F6 = '<F6>',
+            F7 = '<F7>',
+            F8 = '<F8>',
+            F9 = '<F9>',
+            F10 = '<F10>',
+            F11 = '<F11>',
+            F12 = '<F12>',
+          },
         },
       },
 
@@ -805,7 +807,7 @@ require('lazy').setup({
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
+      require('rose-pine').setup {
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
