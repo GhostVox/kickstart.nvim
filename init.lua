@@ -67,6 +67,8 @@ vim.opt.inccommand = 'split'
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
+--Cursor shape
+vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,ve:ver25-Cursor,o:hor50-Cursor,i-ci:ver100-Cursor/lCursor,r-cr:hor15-Cursor/lCursor'
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
@@ -237,7 +239,6 @@ require('lazy').setup({
             F11 = '<F11>',
             F12 = '<F12>',
           },
-
         },
       }
 
@@ -807,7 +808,7 @@ require('lazy').setup({
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
+      require('rose-pine').setup {
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
@@ -821,7 +822,6 @@ require('lazy').setup({
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
-
     end,
   },
 
@@ -914,7 +914,6 @@ require('lazy').setup({
 
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
-
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
