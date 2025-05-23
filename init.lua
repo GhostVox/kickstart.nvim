@@ -45,6 +45,9 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 
+-- wrap line at column lenght
+vim.opt.textwidth = 100
+
 -- Decrease update time
 vim.opt.updatetime = 250
 
@@ -68,7 +71,8 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 --Cursor shape
-vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,ve:ver25-Cursor,o:hor50-Cursor,i-ci:ver100-Cursor/lCursor,r-cr:hor15-Cursor/lCursor'
+vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver200-Cursor/lCursor,r-cr:hor20,o:hor50'
+--
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
@@ -78,7 +82,7 @@ vim.opt.scrolloff = 10
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('i', '<leader>jj', '<Esc>')
+vim.keymap.set('i', 'jj', '<Esc>:write<CR>', { desc = 'Exit insert mode and save' })
 vim.keymap.set('n', '<leader>pv', function()
   vim.cmd ':Ex'
 end)
@@ -580,7 +584,7 @@ require('lazy').setup({
         clangd = {},
         gopls = {},
         pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -674,7 +678,7 @@ require('lazy').setup({
         python = { 'isort', 'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascript = { 'prettier', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -818,7 +822,7 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
 
-      vim.cmd.colorscheme 'rose-pine-main'
+      vim.cmd.colorscheme 'rose-pine-moon'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
