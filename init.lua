@@ -7,7 +7,6 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 vim.g.have_nerd_font = true
-
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -72,7 +71,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 --Cursor shape
-vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver200-Cursor/lCursor,r-cr:hor20,o:hor50'
+vim.opt.guicursor = 'n-v-c:block,i-ci-:ver200-Cursor-blinkwait100-blinkoff100-blinkon100i/lCursor,r-cr:hor20,o:hor50'
 --
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
@@ -585,7 +584,17 @@ require('lazy').setup({
         clangd = {},
         gopls = {},
         pyright = {},
-        rust_analyzer = {},
+        rust_analyzer = {
+          settings = {
+            ['rust-analyzer'] = {
+              -- Enable clippy on save
+              checkOnSave = {
+                command = 'clippy',
+                args = { '--workspace', '--all-targets' },
+              },
+            },
+          },
+        },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -805,8 +814,13 @@ require('lazy').setup({
   { -- Rose Pine colorscheme
     'rose-pine/nvim',
     name = 'rose-pine',
-    priority = 1000, -- Make sure to load this before all the other start plugins
+    priority = 1000,
     config = function()
+      require('rose-pine').setup {
+        -- This disables the background color, making it transparent
+        -- disable_background = true,
+      }
+      -- Load the colorscheme
       vim.cmd 'colorscheme rose-pine'
     end,
   },
@@ -868,7 +882,25 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+
+      -- Add folding support
+      fold = {
+        enable = true,
+      },
     },
+
+    -- Add config function to set up folding options
+    config = function(_, opts)
+      require('nvim-treesitter.configs').setup(opts)
+
+      -- Configure folding
+      vim.opt.foldmethod = 'expr'
+      vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.opt.foldenable = true
+      vim.opt.foldlevelstart = 99 -- Start with all folds open
+      vim.opt.foldnestmax = 3 -- Limit nested folds
+    end,
+
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
@@ -886,12 +918,12 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  --require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -920,8 +952,4 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
-},
-)
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+})
