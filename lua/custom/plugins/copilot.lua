@@ -63,7 +63,7 @@ return {
     opts = {
       debug = true, -- Enable debugging to see errors
       -- Using default OpenAI model
-      model = 'claude-3.7-sonnet', -- Default model
+      model = 'claude-sonnet-4.5', -- Default model
       show_help = true, -- Show help text for CopilotChatHelp
       prompts = {
         Explain = {

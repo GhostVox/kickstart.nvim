@@ -22,4 +22,6 @@ return {
     priority = 1000,
   },
   { 'rose-pine/neovim', name = 'rose-pine', lazy = false, priority = 1000 },
+  { 'lunacookies/vim-colors-xcode', lazy = false, priority = 1000 },
+  { 'EdenEast/nightfox.nvim', lazy = false, priority = 1000 },
 }
