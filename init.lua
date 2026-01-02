@@ -11,13 +11,23 @@ if vim.g.vscode then
   local function map(mode, lhs, rhs)
     vim.keymap.set(mode, lhs, rhs, { silent = true })
   end
-  -- Bind <Esc> to clear highlights (very helpful)
-  vim.keymap.set('n', '<Esc>', '<Cmd>noh<CR><Esc>', { silent = true })
+  -- Bind <Esc> to clear highlights AND close sidebars/panels
+  map('n', '<Esc>', function()
+    vim.cmd 'noh' -- Clear search highlights
+    vscode.action 'workbench.action.closeSidebar' -- Close the side bar (left/right)
+    vscode.action 'workbench.action.closePanel' -- Close the bottom panel (terminal/output)
+  end)
   -- ===== FILE EXPLORER =====
   map('n', '-', function()
     vscode.action 'workbench.view.explorer'
   end)
+  -- Toggle the sidebar (Open/Close)
   map('n', '<leader>e', function()
+    vscode.action 'workbench.action.toggleSidebarVisibility'
+  end)
+
+  -- If you want to specifically FOCUS the explorer or open it if closed
+  map('n', '<leader>E', function()
     vscode.action 'workbench.view.explorer'
   end)
   map('n', '<leader>pv', function()
@@ -103,8 +113,13 @@ if vim.g.vscode then
   map('n', '<leader>b', function()
     vscode.action 'editor.debug.action.toggleBreakpoint'
   end)
+  -- Open Copilot Chat (The sidebar view)
   map('n', '<leader>cc', function()
-    vscode.action 'workbench.panel.chat.view'
+    vscode.action 'workbench.action.chat.open'
+  end)
+  -- Open Copilot Chat (The sidebar view)
+  map('n', '<leader>ci', function()
+    vscode.action 'vscode.editorChat.start'
   end)
   -- Accept suggestion (IntelliSense/Copilot) with Ctrl + y
   vim.keymap.set('i', '<C-y>', function()
