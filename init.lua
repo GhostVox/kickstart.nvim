@@ -401,6 +401,7 @@ else
           { '<leader>w', group = '[W]orkspace' },
           { '<leader>t', group = '[T]oggle' },
           { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+          { '<leader>g', group = '[G]it' },
         }
       end,
     },
@@ -983,9 +984,6 @@ else
         vim.cmd 'colorscheme rose-pine'
       end,
     },
-
-    -- Highlight todo, notes, etc in comments
-    { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
     { -- Collection of various small independent plugins/modules
       'echasnovski/mini.nvim',

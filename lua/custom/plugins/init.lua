@@ -8,7 +8,7 @@ return {
     lazy = false, -- Load the plugin immediately
     config = function()
       -- Example keybinding for :Gstatus
-      vim.keymap.set('n', '<leader>gs', ':Git add . | Git commit<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>gs', ':Git add . | Git commit<CR>', { noremap = true, silent = true, desc = 'Stage & commit all' })
     end,
   },
   {
