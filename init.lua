@@ -140,6 +140,7 @@ if vim.g.vscode then
 
   --- End of VSCode specific settings
 else
+  vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. ':' .. vim.env.PATH
   -- Set <space> as the leader key
   -- See `:help mapleader`
   --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -187,8 +188,8 @@ else
   -- Keep signcolumn on by default
   vim.opt.signcolumn = 'yes'
 
-  -- wrap line at column lenght
-  vim.opt.textwidth = 100
+  -- wrap line at column length
+  vim.opt.textwidth = 120
 
   -- Decrease update time
   vim.opt.updatetime = 250
@@ -216,7 +217,10 @@ else
   vim.opt.guicursor = 'n-v-c:block,i-ci-:ver200-Cursor-blinkwait100-blinkoff100-blinkon100i/lCursor,r-cr:hor20,o:hor50'
   --
   -- Minimal number of screen lines to keep above and below the cursor.
-  vim.opt.scrolloff = 10
+  vim.opt.scrolloff = 8
+
+  -- Hide the command bar until you type
+  vim.opt.cmdheight = 0
 
   -- [[ Basic Keymaps ]]
   --  See `:help vim.keymap.set()`
@@ -249,10 +253,10 @@ else
   --  Use CTRL+<hjkl> to switch between windows
   --
   --  See `:help wincmd` for a list of all window commands
-  vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-  vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-  vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-  vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+  vim.keymap.set('n', '<A-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+  vim.keymap.set('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+  vim.keymap.set('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+  vim.keymap.set('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
   -- [[ Basic Autocommands ]]
   --  See `:help lua-guide-autocommands`
@@ -464,7 +468,11 @@ else
           --   },
           -- },
           --
-          -- pickers = {}
+          pickers = {
+            colorscheme = {
+              enable_preview = true, -- Enable live preview for color schemes
+            },
+          },
           extensions = {
             ['ui-select'] = {
               require('telescope.themes').get_dropdown(),
@@ -511,6 +519,8 @@ else
         vim.keymap.set('n', '<leader>sn', function()
           builtin.find_files { cwd = vim.fn.stdpath 'config' }
         end, { desc = '[S]earch [N]eovim files' })
+
+        vim.keymap.set('n', '<leader>cp', builtin.colorscheme, { desc = '[C]olorscheme [P]icker' })
       end,
     },
 
@@ -729,8 +739,10 @@ else
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
         local servers = {
           clangd = {},
+          neocmake = {},
           gopls = {},
           pyright = {},
+          ruff = {},
           rust_analyzer = {
             settings = {
               ['rust-analyzer'] = {
@@ -832,7 +844,7 @@ else
         formatters_by_ft = {
           lua = { 'stylua' },
           -- Conform can also run multiple formatters sequentially
-          python = { 'isort', 'black' },
+          python = { 'ruff_format', 'black' },
           --
           -- You can use 'stop_after_first' to run the first available formatter from the list
           javascript = { 'prettier', 'prettier', stop_after_first = true },

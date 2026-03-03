@@ -14,7 +14,7 @@ return {
     lang = 'python',
     storage = {
       -- Set your root repository path here
-      home = vim.fn.expand '/Users/brentharrington/Learning/leet_code/python/array/',
+      home = vim.fn.expand '/home/ghostvox/Learning/leet_code/python/array',
 
       cache = vim.fn.expand '~/.cache/leetcode',
     },
