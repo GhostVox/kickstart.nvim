@@ -412,7 +412,6 @@ else
     -- you do for a plugin at the top level, you can do for a dependency.
     --
     -- Use the `dependencies` key to specify the dependencies of a particular plugin
-
     { -- Fuzzy Finder (files, lsp, etc)
       'nvim-telescope/telescope.nvim',
       event = 'VimEnter',
@@ -433,9 +432,6 @@ else
           end,
         },
         { 'nvim-telescope/telescope-ui-select.nvim' },
-
-        -- Useful for getting pretty icons, but requires a Nerd Font.
-        { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       },
       config = function()
         -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -745,6 +741,11 @@ else
           pyright = {},
           ruff = {},
           rust_analyzer = {
+            on_attach = function(client, bufnr)
+              if client.server_capabilities.documentSymbolProvider then
+                require('nvim-navic').attach(client, bufnr)
+              end
+            end,
             settings = {
               ['rust-analyzer'] = {
                 -- Enable clippy on save
@@ -981,7 +982,7 @@ else
           -- disable_background = true,
         }
         -- Load the colorscheme
-        vim.cmd 'colorscheme rose-pine'
+        require 'custom.colorscheme-persist'
       end,
     },
 

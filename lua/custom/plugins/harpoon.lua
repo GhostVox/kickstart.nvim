@@ -6,7 +6,15 @@ return {
     local harpoon = require 'harpoon'
 
     -- REQUIRED
-    harpoon:setup {}
+    harpoon:setup {
+      settings = {
+        save_on_toggle = true,
+        sync_on_ui_close = true,
+        key = function()
+          return vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+        end,
+      },
+    }
 
     -- Basic telescope configuration
     local function toggle_telescope(harpoon_files)
