@@ -61,9 +61,11 @@ return {
       'nvim-lua/plenary.nvim',
     },
     opts = {
-      debug = true, -- Enable debugging to see errors
+      debug = false, -- Enable debugging to see errors
       -- Using default OpenAI model
-      model = 'claude-sonnet-4.5', -- Default model
+      --
+      context = 'buffer',
+      model = 'gpt-5.3-codex', -- Default model
       show_help = true, -- Show help text for CopilotChatHelp
       prompts = {
         Explain = {
