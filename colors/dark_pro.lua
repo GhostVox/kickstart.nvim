@@ -25,7 +25,7 @@ local colors = {
   pink = '#F77FBE', -- keywords.return, includes
   rose_pink = '#D6ACAC', --functions, cursors
   rose_keyword = '#2F6B85', -- keywords , identifiers
-  rose_property = '#8FBDC6', -- properties , hints
+  rose_property = '#8FBDC9', -- properties , hints
 
   -- Cool spectrum (mint → cyan → slate → purple)
   mint = '#A8FFDD', -- hints, properties
