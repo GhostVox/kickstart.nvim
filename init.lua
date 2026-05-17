@@ -676,7 +676,19 @@ else
           clangd = {},
           neocmake = {},
           gopls = {},
-          pyright = {},
+          pyright = {
+            settings = {
+              python = {
+                analysis = {
+                  inlayHints = {
+                    variableTypes = true,
+                    functionReturnTypes = true,
+                    callArgumentNames = true,
+                  },
+                },
+              },
+            },
+          },
           ruff = {},
           rust_analyzer = {
             on_attach = function(client, bufnr)

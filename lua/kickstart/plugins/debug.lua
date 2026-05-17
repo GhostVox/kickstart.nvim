@@ -68,6 +68,11 @@ return {
         args = { '--port', '${port}' },
       },
     }
+    dap.adapters.python = {
+      type = 'executable',
+      command = vim.fn.stdpath 'data' .. '/mason/packages/debugpy/venv/bin/python',
+      args = { '-m', 'debugpy.adapter' },
+    }
 
     dap.configurations.rust = {
       {
