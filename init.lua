@@ -8,9 +8,7 @@ if vim.g.vscode then
   local vscode = require 'vscode'
 
   -- Helper function for keybindings
-  local function map(mode, lhs, rhs)
-    vim.keymap.set(mode, lhs, rhs, { silent = true })
-  end
+  local function map(mode, lhs, rhs) vim.keymap.set(mode, lhs, rhs, { silent = true }) end
   -- Bind <Esc> to clear highlights AND close sidebars/panels
   map('n', '<Esc>', function()
     vim.cmd 'noh' -- Clear search highlights
@@ -18,113 +16,51 @@ if vim.g.vscode then
     vscode.action 'workbench.action.closePanel' -- Close the bottom panel (terminal/output)
   end)
   -- ===== FILE EXPLORER =====
-  map('n', '-', function()
-    vscode.action 'workbench.view.explorer'
-  end)
+  map('n', '-', function() vscode.action 'workbench.view.explorer' end)
   -- Toggle the sidebar (Open/Close)
-  map('n', '<leader>e', function()
-    vscode.action 'workbench.action.toggleSidebarVisibility'
-  end)
+  map('n', '<leader>e', function() vscode.action 'workbench.action.toggleSidebarVisibility' end)
 
   -- If you want to specifically FOCUS the explorer or open it if closed
-  map('n', '<leader>E', function()
-    vscode.action 'workbench.view.explorer'
-  end)
-  map('n', '<leader>pv', function()
-    vscode.action 'workbench.view.explorer'
-  end)
-  map('n', '<leader>\\', function()
-    vscode.action 'revealInExplorer'
-  end)
+  map('n', '<leader>E', function() vscode.action 'workbench.view.explorer' end)
+  map('n', '<leader>pv', function() vscode.action 'workbench.view.explorer' end)
+  map('n', '<leader>\\', function() vscode.action 'revealInExplorer' end)
 
   -- ===== LSP / NAVIGATION =====
-  map('n', '<leader>ca', function()
-    vscode.action 'editor.action.quickFix'
-  end)
-  map('n', '<leader>rn', function()
-    vscode.action 'editor.action.rename'
-  end)
-  map('n', '<leader>ws', function()
-    vscode.action 'workbench.action.showAllSymbols'
-  end)
-  map('n', '<leader>ds', function()
-    vscode.action 'workbench.action.gotoSymbol'
-  end)
-  map('n', '<leader><C-k>', function()
-    vscode.action 'editor.action.showHover'
-  end)
-  map('n', '<leader>D', function()
-    vscode.action 'editor.action.goToTypeDefinition'
-  end)
-  map('n', 'gD', function()
-    vscode.action 'editor.action.revealDeclaration'
-  end)
-  map('n', 'gi', function()
-    vscode.action 'editor.action.goToImplementation'
-  end)
-  map('n', 'gr', function()
-    vscode.action 'references-view.findReferences'
-  end)
-  map('n', 'gd', function()
-    vscode.action 'editor.action.revealDefinition'
-  end)
+  map('n', '<leader>ca', function() vscode.action 'editor.action.quickFix' end)
+  map('n', '<leader>rn', function() vscode.action 'editor.action.rename' end)
+  map('n', '<leader>ws', function() vscode.action 'workbench.action.showAllSymbols' end)
+  map('n', '<leader>ds', function() vscode.action 'workbench.action.gotoSymbol' end)
+  map('n', '<leader><C-k>', function() vscode.action 'editor.action.showHover' end)
+  map('n', '<leader>D', function() vscode.action 'editor.action.goToTypeDefinition' end)
+  map('n', 'gD', function() vscode.action 'editor.action.revealDeclaration' end)
+  map('n', 'gi', function() vscode.action 'editor.action.goToImplementation' end)
+  map('n', 'gr', function() vscode.action 'references-view.findReferences' end)
+  map('n', 'gd', function() vscode.action 'editor.action.revealDefinition' end)
 
   -- ===== SEARCH =====
-  map('n', '<leader>sf', function()
-    vscode.action 'workbench.action.quickOpen'
-  end)
-  map('n', '<leader>sk', function()
-    vscode.action 'workbench.action.openGlobalKeybindings'
-  end)
-  map('n', '<leader>ss', function()
-    vscode.action 'workbench.action.quickOpen'
-  end)
-  map('n', '<leader>sw', function()
-    vscode.action('workbench.action.findInFiles', { args = { query = vim.fn.expand '<cword>' } })
-  end)
-  map('n', '<leader>sg', function()
-    vscode.action 'workbench.action.findInFiles'
-  end)
-  map('n', '<leader>sd', function()
-    vscode.action 'workbench.actions.view.problems'
-  end)
-  map('n', '<leader><leader>', function()
-    vscode.action 'workbench.action.quickOpen'
-  end)
-  map('n', '<leader>/', function()
-    vscode.action 'actions.find'
-  end)
+  map('n', '<leader>sf', function() vscode.action 'workbench.action.quickOpen' end)
+  map('n', '<leader>sk', function() vscode.action 'workbench.action.openGlobalKeybindings' end)
+  map('n', '<leader>ss', function() vscode.action 'workbench.action.quickOpen' end)
+  map('n', '<leader>sw', function() vscode.action('workbench.action.findInFiles', { args = { query = vim.fn.expand '<cword>' } }) end)
+  map('n', '<leader>sg', function() vscode.action 'workbench.action.findInFiles' end)
+  map('n', '<leader>sd', function() vscode.action 'workbench.actions.view.problems' end)
+  map('n', '<leader><leader>', function() vscode.action 'workbench.action.quickOpen' end)
+  map('n', '<leader>/', function() vscode.action 'actions.find' end)
 
   -- ===== FORMATTING & EDITING =====
-  map({ 'n', 'v' }, '<leader>f', function()
-    vscode.action 'editor.action.formatDocument'
-  end)
-  map('n', '<leader>d', function()
-    vscode.action 'editor.action.copyLinesDownAction'
-  end)
-  map('n', '<leader>x', function()
-    vscode.action 'workbench.action.closeActiveEditor'
-  end)
+  map({ 'n', 'v' }, '<leader>f', function() vscode.action 'editor.action.formatDocument' end)
+  map('n', '<leader>d', function() vscode.action 'editor.action.copyLinesDownAction' end)
+  map('n', '<leader>x', function() vscode.action 'workbench.action.closeActiveEditor' end)
 
   -- ===== GIT / DEBUG / AI =====
-  map('n', '<leader>gs', function()
-    vscode.action 'workbench.view.scm'
-  end)
-  map('n', '<leader>b', function()
-    vscode.action 'editor.debug.action.toggleBreakpoint'
-  end)
+  map('n', '<leader>gs', function() vscode.action 'workbench.view.scm' end)
+  map('n', '<leader>b', function() vscode.action 'editor.debug.action.toggleBreakpoint' end)
   -- Open Copilot Chat (The sidebar view)
-  map('n', '<leader>cc', function()
-    vscode.action 'workbench.action.chat.open'
-  end)
+  map('n', '<leader>cc', function() vscode.action 'workbench.action.chat.open' end)
   -- Open Copilot Chat (The sidebar view)
-  map('n', '<leader>ci', function()
-    vscode.action 'vscode.editorChat.start'
-  end)
+  map('n', '<leader>ci', function() vscode.action 'vscode.editorChat.start' end)
   -- Accept suggestion (IntelliSense/Copilot) with Ctrl + y
-  vim.keymap.set('i', '<C-y>', function()
-    require('vscode').action 'editor.action.acceptSelectedSuggestion'
-  end)
+  vim.keymap.set('i', '<C-y>', function() require('vscode').action 'editor.action.acceptSelectedSuggestion' end)
   -- ===== UTILS =====
   map('n', '<Esc>', '<Cmd>noh<CR><Esc>')
   -- Highlight on yank
@@ -171,9 +107,7 @@ else
   --  Schedule the setting after `UiEnter` because it can increase startup-time.
   --  Remove this option if you want your OS clipboard to remain independent.
   --  See `:help 'clipboard'`
-  vim.schedule(function()
-    vim.opt.clipboard = 'unnamedplus'
-  end)
+  vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 
   -- Enable break indent
   vim.opt.breakindent = true
@@ -229,9 +163,7 @@ else
   --  See `:help hlsearch`
   vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
   vim.keymap.set('i', 'jj', '<Esc>:write<CR>', { desc = 'Exit insert mode and save' })
-  vim.keymap.set('n', '<leader>pv', function()
-    vim.cmd ':Ex'
-  end)
+  vim.keymap.set('n', '<leader>pv', function() vim.cmd ':Ex' end)
   -- Diagnostic keymaps
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -261,15 +193,15 @@ else
   -- [[ Basic Autocommands ]]
   --  See `:help lua-guide-autocommands`
 
+  -- Yank entire file
+  vim.keymap.set('n', 'yae', '<cmd>%y+<CR>', { desc = 'Yank [A]ll [E]verything' })
   -- Highlight when yanking (copying) text
   --  Try it with `yap` in normal mode
   --  See `:help vim.highlight.on_yank()`
   vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
     group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-    callback = function()
-      vim.highlight.on_yank()
-    end,
+    callback = function() vim.highlight.on_yank() end,
   })
 
   vim.keymap.set('n', '<leader>yae', function() vim.cmd ':%y' end)
@@ -279,9 +211,7 @@ else
   if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
     local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-    if vim.v.shell_error ~= 0 then
-      error('Error cloning lazy.nvim:\n' .. out)
-    end
+    if vim.v.shell_error ~= 0 then error('Error cloning lazy.nvim:\n' .. out) end
   end ---@diagnostic disable-next-line: undefined-field
   vim.opt.rtp:prepend(lazypath)
 
@@ -428,9 +358,7 @@ else
 
           -- `cond` is a condition used to determine whether this plugin should be
           -- installed and loaded.
-          cond = function()
-            return vim.fn.executable 'make' == 1
-          end,
+          cond = function() return vim.fn.executable 'make' == 1 end,
         },
         { 'nvim-telescope/telescope-ui-select.nvim' },
       },
@@ -506,17 +434,20 @@ else
 
         -- It's also possible to pass additional configuration options.
         --  See `:help telescope.builtin.live_grep()` for information about particular keys
-        vim.keymap.set('n', '<leader>s/', function()
-          builtin.live_grep {
-            grep_open_files = true,
-            prompt_title = 'Live Grep in Open Files',
-          }
-        end, { desc = '[S]earch [/] in Open Files' })
+        vim.keymap.set(
+          'n',
+          '<leader>s/',
+          function()
+            builtin.live_grep {
+              grep_open_files = true,
+              prompt_title = 'Live Grep in Open Files',
+            }
+          end,
+          { desc = '[S]earch [/] in Open Files' }
+        )
 
         -- Shortcut for searching your Neovim configuration files
-        vim.keymap.set('n', '<leader>sn', function()
-          builtin.find_files { cwd = vim.fn.stdpath 'config' }
-        end, { desc = '[S]earch [N]eovim files' })
+        vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
 
         vim.keymap.set('n', '<leader>cp', builtin.colorscheme, { desc = '[C]olorscheme [P]icker' })
       end,
@@ -590,9 +521,7 @@ else
             --
             -- In this case, we create a function that lets us more easily define mappings specific
             -- for LSP related items. It sets the mode, buffer and description for us each time.
-            local map = function(keys, func, desc)
-              vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-            end
+            local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc }) end
 
             -- Jump to the definition of the word under your cursor.
             --  This is where a variable was first declared, or where a function is defined, etc.
@@ -688,9 +617,7 @@ else
             --
             -- This may be unwanted, since they displace some of your code
             if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-              map('<leader>th', function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-              end, '[T]oggle Inlay [H]ints')
+              map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
             end
           end,
         })
@@ -753,9 +680,7 @@ else
           ruff = {},
           rust_analyzer = {
             on_attach = function(client, bufnr)
-              if client.server_capabilities.documentSymbolProvider then
-                require('nvim-navic').attach(client, bufnr)
-              end
+              if client.server_capabilities.documentSymbolProvider then require('nvim-navic').attach(client, bufnr) end
             end,
             settings = {
               ['rust-analyzer'] = {
@@ -835,9 +760,7 @@ else
       keys = {
         {
           '<leader>f',
-          function()
-            require('conform').format { async = true, lsp_fallback = true }
-          end,
+          function() require('conform').format { async = true, lsp_fallback = true } end,
           mode = '',
           desc = '[F]ormat buffer',
         },
@@ -876,9 +799,7 @@ else
             -- Build Step is needed for regex support in snippets.
             -- This step is not supported in many windows environments.
             -- Remove the below condition to re-enable on windows.
-            if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-              return
-            end
+            if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then return end
             return 'make install_jsregexp'
           end)(),
           dependencies = {
@@ -910,9 +831,7 @@ else
 
         cmp.setup {
           snippet = {
-            expand = function(args)
-              luasnip.lsp_expand(args.body)
-            end,
+            expand = function(args) luasnip.lsp_expand(args.body) end,
           },
           completion = { completeopt = 'menu,menuone,noinsert' },
 
@@ -955,14 +874,10 @@ else
             -- <c-l> will move you to the right of each of the expansion locations.
             -- <c-h> is similar, except moving you backwards.
             ['<C-l>'] = cmp.mapping(function()
-              if luasnip.expand_or_locally_jumpable() then
-                luasnip.expand_or_jump()
-              end
+              if luasnip.expand_or_locally_jumpable() then luasnip.expand_or_jump() end
             end, { 'i', 's' }),
             ['<C-h>'] = cmp.mapping(function()
-              if luasnip.locally_jumpable(-1) then
-                luasnip.jump(-1)
-              end
+              if luasnip.locally_jumpable(-1) then luasnip.jump(-1) end
             end, { 'i', 's' }),
 
             -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
@@ -1026,9 +941,7 @@ else
         -- default behavior. For example, here we set the section for
         -- cursor location to LINE:COLUMN
         ---@diagnostic disable-next-line: duplicate-set-field
-        statusline.section_location = function()
-          return '%2l:%-2v'
-        end
+        statusline.section_location = function() return '%2l:%-2v' end
 
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
