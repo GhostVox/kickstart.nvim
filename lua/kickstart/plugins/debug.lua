@@ -22,7 +22,7 @@ return {
     -- Installs the debug adapters for you
     'mason-org/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-
+    'theHamsta/nvim-dap-virtual-text',
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
   },
@@ -136,6 +136,17 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+    -- SET UP VIRTUAL TEXT
+    require('nvim-dap-virtual-text').setup {
+      enabled = true,
+      display_callback = function(variable, buf, stackframe, node, options)
+        if options.virt_text_pos == 'inline' then
+          return ' = ' .. variable.value
+        else
+          return variable.name .. ' = ' .. variable.value
+        end
+      end,
+    }
     -- Install golang specific config
     require('dap-go').setup {
       delve = {
