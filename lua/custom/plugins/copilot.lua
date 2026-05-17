@@ -65,7 +65,7 @@ return {
       -- Using default OpenAI model
       --
       context = 'buffer',
-      model = 'gpt-5.3-codex', -- Default model
+      model = 'gpt-5.2-codex', -- Default model
       show_help = true, -- Show help text for CopilotChatHelp
       prompts = {
         Explain = {
@@ -94,11 +94,9 @@ return {
 
       -- Add CopilotChat group to which-key
       local ok, wk = pcall(require, 'which-key')
-      if ok then
-        wk.add {
-          { '<leader>c', group = 'Copilot/[C]ode' },
-        }
-      end
+      if ok then wk.add {
+        { '<leader>c', group = 'Copilot/[C]ode' },
+      } end
     end,
   },
 }

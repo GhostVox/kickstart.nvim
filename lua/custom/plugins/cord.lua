@@ -5,10 +5,15 @@ return {
       editor = {
         tooltip = 'The Superior Text Editor',
       },
-      idle = { enabled = true, text = '...' },
-      display = {
-        show_time = true,
-        show_repository = true,
+      idle = {
+        enabled = true,
+        label = '...', -- was 'text'
+      },
+      timestamp = {
+        enabled = true, -- was display.show_time
+      },
+      repository = {
+        enabled = true, -- was display.show_repository
       },
     }
   end,
